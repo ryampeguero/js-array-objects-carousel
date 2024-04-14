@@ -96,6 +96,22 @@ document.querySelector(".my-previous").addEventListener("click", previous);
 
 document.querySelector(".my-next").addEventListener("click", next);
 
+//Bonus 1
+allThumbnails.forEach((elem, i)=>{
+  elem.addEventListener("click",()=>{
+    allImages.forEach((currElem, i)=>{
+      allImages[i].classList.remove("active");
+      allThumbnails[i].classList.remove("active");   
+    })
+    
+
+    
+  allImages[i].classList.add("active");
+  allThumbnails[i].classList.add("active");
+
+  })
+})
+
 function next(){
   allImages[counter].classList.remove("active");
   allThumbnails[counter].classList.remove("active");
