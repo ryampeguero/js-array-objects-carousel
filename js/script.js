@@ -112,6 +112,9 @@ allThumbnails.forEach((elem, i)=>{
   })
 })
 
+//Bonus 2
+setTimeout(setInterval(next, 1000), 500);
+
 function next(){
   allImages[counter].classList.remove("active");
   allThumbnails[counter].classList.remove("active");
