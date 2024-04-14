@@ -32,15 +32,11 @@ const carouselContainer = document.querySelector(".my-carousel-images");
 
 
 //Creazione del div di immagini da inserire nel carousel
+let carouselItemDiv = "";
 
-
-
-// console.log(carouselItemDiv.classList);
-
-let htmlprova="";
 
 images.forEach((currElem, index) =>{
-  const carouselItemDiv = document.createElement("div");
+  carouselItemDiv = document.createElement("div");
   carouselItemDiv.classList.add("my-carousel-item");
   if (index < 1) carouselItemDiv.classList.add("active");
 
@@ -50,14 +46,12 @@ images.forEach((currElem, index) =>{
     <img
       class="img-fluid"
       src="./${currElem.image}"
-      alt="Marvel's Spiderman Miles Morale picture"
+      alt="${currElem.title}"
     />
     <div class="item-description px-3">
-      <h2>Marvel's Spiderman Miles Morale</h2>
+      <h2>${currElem.title}}</h2>
       <p>
-        Experience the rise of Miles Morales as the new hero
-        masters incredible, explosive new powers to become his own
-        Spider-Man.
+        ${currElem.text}
       </p>
     </div>
 
@@ -72,10 +66,34 @@ images.forEach((currElem, index) =>{
 
 
 // console.log(carouselItemDiv.innerHTML);
+const allImages = document.querySelectorAll(".my-carousel-item")
+console.log(allImages[1]);
+let counter = 0;
+allImages[counter].classList.add("active");
+document.querySelector(".my-previous").addEventListener("click", previous);
 
-document.querySelector(".my-previous").addEventListener("click", () => {
-  console.warn("indietro");
-});
-document.querySelector(".my-next").addEventListener("click", () => {
-  console.warn("avanti");
-});
+
+document.querySelector(".my-next").addEventListener("click", next);
+
+function next(){
+  allImages[counter].classList.remove("active");
+  if(counter < allImages.length - 1 ){
+    counter++;
+  }else{
+    counter = 0;
+  }
+
+  allImages[counter].classList.add("active");
+}
+
+
+function previous(){
+  allImages[counter].classList.remove("active");
+  if (counter <= 0) {
+    counter = allImages.length - 1;
+  }else{
+    counter--;
+  }
+
+  allImages[counter].classList.add("active");
+}
