@@ -113,7 +113,31 @@ allThumbnails.forEach((elem, i)=>{
 })
 
 //Bonus 2
-setTimeout(setInterval(next, 1000), 500);
+let nextInterval = "";
+let previousInterval = "";
+
+nextInterval = setInterval(next, 3000);
+intervalControl = 0;
+
+///Bonus 3
+document.getElementById("my-order-button").addEventListener("click", ()=>{
+  clearInterval(nextInterval);
+  previousInterval = setInterval(previous, 3000);
+});
+
+document.getElementById("my-stop-button").addEventListener("click", ()=>{
+  
+  clearInterval(nextInterval);
+  clearInterval(previousInterval);
+
+  if(intervalControl == 1){
+    nextInterval = setInterval(next, 3000);
+    intervalControl = 0;
+  }else{
+    intervalControl = 1;
+  }
+});
+
 
 function next(){
   allImages[counter].classList.remove("active");
