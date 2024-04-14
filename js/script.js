@@ -29,16 +29,19 @@ const images = [
 
 // MILESTONE 1
 const carouselContainer = document.querySelector(".my-carousel-images");
-
+const thumbnailContainer = document.querySelector(".my-thumbnails");
 
 //Creazione del div di immagini da inserire nel carousel
 let carouselItemDiv = "";
+let thumbnailDiv = "";
 
 
 images.forEach((currElem, index) =>{
+  //carousel
   carouselItemDiv = document.createElement("div");
   carouselItemDiv.classList.add("my-carousel-item");
   if (index < 1) carouselItemDiv.classList.add("active");
+
 
   console.log(index);
   
@@ -57,8 +60,23 @@ images.forEach((currElem, index) =>{
 
 `;
   carouselItemDiv.innerHTML = imgDiv;
-  console.log(carouselItemDiv);
+  // console.log(carouselItemDiv);
   carouselContainer.append(carouselItemDiv);
+
+    //thumbnails
+    thumbnailImgTag = document.createElement("img");
+    thumbnailImgTag.classList.add("img-fluid", "my-thumbnail");
+  
+    const thumbnailImg = `
+    <img
+    class="img-fluid my-thumbnail"
+    src="./${currElem.image}"
+    alt="Thumbnail of Ratchet & Clank: Rift Apart picture"
+    />
+    `
+    thumbnailImgTag.src = `./${currElem.image}`;
+    console.log(thumbnailDiv);
+    thumbnailContainer.append(thumbnailImgTag);
 
 });
 
@@ -67,9 +85,12 @@ images.forEach((currElem, index) =>{
 
 // console.log(carouselItemDiv.innerHTML);
 const allImages = document.querySelectorAll(".my-carousel-item")
-console.log(allImages[1]);
+const allThumbnails = document.querySelectorAll(".my-thumbnail")
+console.log(allThumbnails);
 let counter = 0;
 allImages[counter].classList.add("active");
+allThumbnails[counter].classList.add("active");
+
 document.querySelector(".my-previous").addEventListener("click", previous);
 
 
@@ -77,6 +98,8 @@ document.querySelector(".my-next").addEventListener("click", next);
 
 function next(){
   allImages[counter].classList.remove("active");
+  allThumbnails[counter].classList.remove("active");
+  
   if(counter < allImages.length - 1 ){
     counter++;
   }else{
@@ -84,11 +107,15 @@ function next(){
   }
 
   allImages[counter].classList.add("active");
+  allThumbnails[counter].classList.add("active");
+  
 }
 
 
 function previous(){
   allImages[counter].classList.remove("active");
+  allThumbnails[counter].classList.remove("active");
+  
   if (counter <= 0) {
     counter = allImages.length - 1;
   }else{
@@ -96,4 +123,6 @@ function previous(){
   }
 
   allImages[counter].classList.add("active");
+  allThumbnails[counter].classList.add("active");
+  
 }
