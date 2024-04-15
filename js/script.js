@@ -100,9 +100,13 @@ document.querySelector(".my-next").addEventListener("click", next);
 allThumbnails.forEach((elem, i)=>{
   elem.addEventListener("click",()=>{
     clearAllIntervals();
+    
     allImages.forEach((currElem, i)=>{
-      allImages[counter].classList.remove("active");
-      allThumbnails[counter].classList.remove("active");   
+      if(allImages[i].classList.contains("active")){
+        allImages[i].classList.remove("active");
+        allThumbnails[i].classList.remove("active");   
+      }
+      
     })
     
 
@@ -110,8 +114,10 @@ allThumbnails.forEach((elem, i)=>{
   allImages[i].classList.add("active");
   allThumbnails[i].classList.add("active");
   intervalControl = 1;
+  counter = i;
   })
 })
+
 
 //Bonus 2
 let nextInterval = "";
@@ -141,15 +147,13 @@ document.getElementById("my-stop-button").addEventListener("click", ()=>{
   }else{
     intervalControl = 1;
   }
-});
 
-console.log(counter);
+});
 
 
 function next(){
-  allImages[counter].classList.remove("active");
-  allThumbnails[counter].classList.remove("active");
-  
+  removeActive();  
+  console.log("Counter", counter);
   if(counter < allImages.length - 1 ){
     counter++;
   }else{
@@ -181,4 +185,11 @@ function clearAllIntervals(){
   clearInterval(nextInterval);
   clearInterval(previousInterval);
   
+}
+
+function removeActive(){
+  if(allImages[counter].classList.contains("active")){
+    allImages[counter].classList.remove("active");
+    allThumbnails[counter].classList.remove("active");  
+  }
 }
