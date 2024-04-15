@@ -99,16 +99,17 @@ document.querySelector(".my-next").addEventListener("click", next);
 //Bonus 1
 allThumbnails.forEach((elem, i)=>{
   elem.addEventListener("click",()=>{
+    clearAllIntervals();
     allImages.forEach((currElem, i)=>{
-      allImages[i].classList.remove("active");
-      allThumbnails[i].classList.remove("active");   
+      allImages[counter].classList.remove("active");
+      allThumbnails[counter].classList.remove("active");   
     })
     
 
     
   allImages[i].classList.add("active");
   allThumbnails[i].classList.add("active");
-
+  intervalControl = 1;
   })
 })
 
@@ -116,8 +117,13 @@ allThumbnails.forEach((elem, i)=>{
 let nextInterval = "";
 let previousInterval = "";
 
-nextInterval = setInterval(next, 3000);
+
 intervalControl = 0;
+if(intervalControl == 0){
+  nextInterval = setInterval(next, 3000);
+}
+
+
 
 ///Bonus 3
 document.getElementById("my-order-button").addEventListener("click", ()=>{
@@ -127,8 +133,7 @@ document.getElementById("my-order-button").addEventListener("click", ()=>{
 
 document.getElementById("my-stop-button").addEventListener("click", ()=>{
   
-  clearInterval(nextInterval);
-  clearInterval(previousInterval);
+  clearAllIntervals();
 
   if(intervalControl == 1){
     nextInterval = setInterval(next, 3000);
@@ -137,6 +142,8 @@ document.getElementById("my-stop-button").addEventListener("click", ()=>{
     intervalControl = 1;
   }
 });
+
+console.log(counter);
 
 
 function next(){
@@ -167,5 +174,11 @@ function previous(){
 
   allImages[counter].classList.add("active");
   allThumbnails[counter].classList.add("active");
+  
+}
+
+function clearAllIntervals(){
+  clearInterval(nextInterval);
+  clearInterval(previousInterval);
   
 }
